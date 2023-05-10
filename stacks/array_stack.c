@@ -1,34 +1,30 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#define STACK_LIMIT 10
+#define MAX_STACK 10
 
-int stack[STACK_LIMIT];
+int stack[MAX_STACK];
 int top = -1;
 
 bool push(int value) {
-    if(top >= STACK_LIMIT) return false;
-
-    top++;
-    stack[top] = value;
+    if(top > MAX_STACK) return false; //stack is full
+    stack[++top] = value;
     return true;
 }
 
-int pop() {
+int pop(void) {
     if(top < 0) return -100;
-
     return stack[top--];
 }
 
 int main(void) {
-    for(int i=0;i<STACK_LIMIT;i++) {
-        push(i*10);
-    }
+    push(10);
+    push(20);
+    push(30);
 
-    int tmp;
-    while((tmp = pop()) != -100) {
-        printf("%d\n", tmp);
-    }
+    printf("%d\n", pop());
+    printf("%d\n", pop());
+    printf("%d\n", pop());
 
     return 0;
 }
